@@ -1,151 +1,215 @@
-<!DOCTYPE html> <html lang="en"> <head> <!-- CleanShot – Single-File Micro-SaaS Author: Placeholder Deployable directly on GitHub Pages --> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>CleanShot – Turn raw text into authority</title> <!-- Google Fonts --> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"> <!-- Tailwind CSS CDN --> <script src="https://cdn.tailwindcss.com"></script> <!-- html2canvas (lazy loaded later) --> <style> /* ========================================================= BASE DESIGN TOKENS ========================================================= */ html { scroll-behavior: smooth; } body { font-family: 'Inter', system-ui, sans-serif; background: radial-gradient(1200px 600px at 10% -10%, #1f2937, transparent), radial-gradient(800px 400px at 90% 10%, #111827, transparent), #030712; color: #e5e7eb; } .font-brutal { font-weight: 800; letter-spacing: -0.02em; } .glass { background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(var(--blur, 16px)); -webkit-backdrop-filter: blur(var(--blur, 16px)); border: 1px solid rgba(255, 255, 255, 0.12); } .noise::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"); pointer-events: none; mix-blend-mode: overlay; } .range { accent-color: #6366f1; } .pro-locked { opacity: 0.4; filter: grayscale(1); cursor: not-allowed; } .window-dots span { width: 10px; height: 10px; border-radius: 9999px; display: inline-block; } .tooltip { position: relative; } .tooltip:hover::after { content: attr(data-tip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #020617; border: 1px solid rgba(255,255,255,0.1); padding: 6px 10px; border-radius: 8px; font-size: 12px; white-space: nowrap; z-index: 50; } </style> </head> <body class="antialiased"> <!-- ========================================================= HERO / LANDING ========================================================= --> <section class="relative overflow-hidden"> <div class="max-w-6xl mx-auto px-6 py-24 text-center"> <h1 class="text-5xl md:text-6xl font-brutal mb-4">CleanShot</h1> <p class="text-xl text-indigo-400 mb-2">Turn raw text into authority.</p> <p class="text-lg text-gray-400 mb-8">Built for people who build in public.</p> <a href="#app" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 transition text-white font-semibold"> Start Creating → </a> <p class="mt-4 text-sm text-gray-500">No signup. No tracking. One HTML file.</p> </div> </section> <!-- ========================================================= APP UI ========================================================= --> <section id="app" class="max-w-7xl mx-auto px-6 py-20"> <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-  <!-- ================= LEFT PANEL ================= -->
-<div class="glass rounded-2xl p-6 space-y-5">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CleanShot – Turn raw text into authority</title>
 
-  <h2 class="text-xl font-semibold">Controls</h2>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Text Input -->
-  <textarea id="textInput" rows="6" class="w-full rounded-xl bg-black/30 border border-white/10 p-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Write something worth sharing…"></textarea>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Presets -->
-  <div class="flex gap-2 text-sm">
-    <button class="preset px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20" data-type="tweet">Tweet</button>
-    <button class="preset px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20" data-type="testimonial">Testimonial</button>
-    <button class="preset px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20" data-type="code">Code Snippet</button>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1f2937, transparent),
+        radial-gradient(800px 400px at 90% 10%, #111827, transparent),
+        #030712;
+      color: #e5e7eb;
+    }
+
+    .font-brutal { font-weight: 800; letter-spacing: -0.02em; }
+
+    .glass {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(var(--blur,16px));
+      -webkit-backdrop-filter: blur(var(--blur,16px));
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .noise::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events:none;
+      mix-blend-mode:overlay;
+    }
+
+    .range { accent-color:#6366f1; }
+    .pro-locked { opacity:.4; filter:grayscale(1); cursor:not-allowed; }
+
+    .window-dots span {
+      width:10px;height:10px;border-radius:9999px;display:inline-block;
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+<!-- HERO -->
+<section class="text-center py-24">
+  <h1 class="text-6xl font-brutal mb-4">CleanShot</h1>
+  <p class="text-indigo-400 text-xl">Turn raw text into authority.</p>
+  <p class="text-gray-400 mb-8">Built for people who build in public.</p>
+  <a href="#app" class="px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 font-semibold">
+    Start Creating →
+  </a>
+</section>
+
+<!-- APP -->
+<section id="app" class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-6">
+
+<!-- CONTROLS -->
+<div class="glass rounded-2xl p-6 space-y-4">
+  <textarea id="textInput" rows="6" class="w-full rounded-xl bg-black/30 border border-white/10 p-4" placeholder="Write something worth sharing…"></textarea>
+
+  <div class="flex gap-2">
+    <button class="preset px-3 py-1 rounded bg-white/10" data-type="tweet">Tweet</button>
+    <button class="preset px-3 py-1 rounded bg-white/10" data-type="testimonial">Testimonial</button>
+    <button class="preset px-3 py-1 rounded bg-white/10" data-type="code">Code</button>
   </div>
 
-  <!-- Mode Toggle -->
-  <div class="flex items-center gap-4">
-    <label class="flex items-center gap-2">
-      <input type="radio" name="mode" value="text" checked>
-      <span>Text Mode</span>
-    </label>
-    <label class="flex items-center gap-2">
-      <input type="radio" name="mode" value="code">
-      <span>Code Mode</span>
-    </label>
+  <div class="flex gap-4 text-sm">
+    <label><input type="radio" name="mode" value="text" checked> Text</label>
+    <label><input type="radio" name="mode" value="code"> Code</label>
   </div>
 
-  <!-- Font -->
-  <div>
-    <label class="block text-sm mb-1">Font Family</label>
-    <select id="fontFamily" class="w-full rounded-xl bg-black/30 border border-white/10 p-2">
-      <option value="Inter">Inter</option>
-      <option value="JetBrains Mono">JetBrains Mono</option>
-    </select>
+  <select id="fontFamily" class="w-full rounded bg-black/30 p-2">
+    <option>Inter</option>
+    <option>JetBrains Mono</option>
+  </select>
+
+  <input id="fontSize" type="range" min="14" max="32" value="18" class="range">
+  <input id="lineHeight" type="range" min="1.2" max="2" step="0.1" value="1.5" class="range">
+
+  <div class="grid grid-cols-2 gap-2">
+    <input id="username" class="bg-black/30 p-2 rounded" placeholder="Name">
+    <input id="handle" class="bg-black/30 p-2 rounded" placeholder="@handle">
   </div>
 
-  <!-- Font Size -->
-  <div>
-    <label class="block text-sm mb-1">Font Size</label>
-    <input id="fontSize" type="range" min="14" max="32" value="18" class="w-full range">
-  </div>
+  <label><input type="checkbox" id="avatarToggle" checked> Show avatar</label>
+  <input id="dateInput" class="bg-black/30 p-2 rounded">
 
-  <!-- Line Height -->
-  <div>
-    <label class="block text-sm mb-1">Line Height</label>
-    <input id="lineHeight" type="range" min="1.2" max="2" step="0.1" value="1.5" class="w-full range">
-  </div>
+  <div id="themes" class="grid grid-cols-2 gap-2 text-sm"></div>
 
-  <!-- Username / Handle -->
-  <div class="grid grid-cols-2 gap-3">
-    <input id="username" class="rounded-xl bg-black/30 border border-white/10 p-2" placeholder="Name">
-    <input id="handle" class="rounded-xl bg-black/30 border border-white/10 p-2" placeholder="@handle">
-  </div>
+  <input id="shadowDepth" type="range" min="0" max="40" value="20" class="range">
+  <input id="blurIntensity" type="range" min="4" max="32" value="16" class="range">
 
-  <!-- Avatar -->
-  <label class="flex items-center gap-2 text-sm">
-    <input type="checkbox" id="avatarToggle" checked>
-    Show Avatar
-  </label>
+  <label><input type="checkbox" id="noiseToggle" checked> Background noise</label>
 
-  <!-- Date -->
-  <input id="dateInput" class="w-full rounded-xl bg-black/30 border border-white/10 p-2 text-sm">
-
-  <!-- Theme -->
-  <div>
-    <label class="block text-sm mb-1">Theme</label>
-    <div id="themes" class="grid grid-cols-2 gap-2 text-sm"></div>
-  </div>
-
-  <!-- Shadow -->
-  <div>
-    <label class="block text-sm mb-1">Shadow Depth</label>
-    <input id="shadowDepth" type="range" min="0" max="40" value="20" class="w-full range">
-  </div>
-
-  <!-- Blur -->
-  <div>
-    <label class="block text-sm mb-1">Glass Blur</label>
-    <input id="blurIntensity" type="range" min="4" max="32" value="16" class="w-full range">
-  </div>
-
-  <!-- Noise -->
-  <label class="flex items-center gap-2 text-sm">
-    <input type="checkbox" id="noiseToggle" checked>
-    Background Noise
-  </label>
-
-  <!-- Export -->
-  <button id="exportBtn" class="w-full mt-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 transition font-semibold">
-    Export as PNG
+  <button id="exportBtn" class="w-full py-3 bg-indigo-600 rounded-xl font-semibold">
+    Export PNG
   </button>
-
 </div>
 
-<!-- ================= RIGHT PANEL ================= -->
-<div class="flex items-center justify-center">
-  <div id="previewWrapper" class="relative">
-    <div id="preview" class="glass rounded-2xl p-6 w-[360px] sm:w-[420px] shadow-2xl relative noise">
-
-      <!-- Fake Window -->
-      <div class="flex items-center gap-2 mb-4 window-dots">
-        <span style="background:#ef4444"></span>
-        <span style="background:#f59e0b"></span>
-        <span style="background:#10b981"></span>
-      </div>
-
-      <!-- Header -->
-      <div class="flex items-center gap-3 mb-4">
-        <div id="avatar" class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center font-bold">A</div>
-        <div>
-          <div id="previewName" class="font-semibold">Anonymous</div>
-          <div id="previewHandle" class="text-sm text-gray-400">@handle</div>
-        </div>
-        <div class="ml-auto text-xs text-gray-400" id="previewDate"></div>
-      </div>
-
-      <!-- Content -->
-      <pre id="previewText" class="whitespace-pre-wrap break-words"></pre>
-
-      <!-- Footer -->
-      <div id="watermark" class="mt-4 text-xs text-gray-500 text-right">
-        Made with CleanShot
-      </div>
+<!-- PREVIEW -->
+<div class="flex justify-center items-center">
+  <div id="preview" class="glass noise rounded-2xl p-6 w-[420px] relative shadow-2xl">
+    <div class="flex gap-2 mb-3 window-dots">
+      <span style="background:#ef4444"></span>
+      <span style="background:#f59e0b"></span>
+      <span style="background:#10b981"></span>
     </div>
+
+    <div class="flex items-center gap-3 mb-4">
+      <div id="avatar" class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center font-bold">A</div>
+      <div>
+        <div id="previewName" class="font-semibold">Anonymous</div>
+        <div id="previewHandle" class="text-sm text-gray-400">@handle</div>
+      </div>
+      <div id="previewDate" class="ml-auto text-xs text-gray-400"></div>
+    </div>
+
+    <pre id="previewText" class="whitespace-pre-wrap"></pre>
+    <div id="watermark" class="text-xs text-gray-500 mt-4 text-right">Made with CleanShot</div>
   </div>
 </div>
-</div> </section> <!-- ========================================================= PRICING ========================================================= --> <section class="max-w-5xl mx-auto px-6 py-20"> <h2 class="text-3xl font-brutal text-center mb-12">Simple Pricing</h2> <div class="grid md:grid-cols-2 gap-6">
-  <div class="glass rounded-2xl p-6">
-  <h3 class="text-xl font-semibold mb-2">Free</h3>
-  <ul class="text-sm text-gray-400 space-y-2 mb-4">
-    <li>• 3 themes</li>
-    <li>• Watermark</li>
-    <li>• Standard export</li>
-  </ul>
-</div>
+</section>
 
-<div class="glass rounded-2xl p-6 border border-indigo-500">
-  <h3 class="text-xl font-semibold mb-2">Pro</h3>
-  <p class="text-indigo-400 mb-2">₹499 lifetime (placeholder)</p>
-  <ul class="text-sm text-gray-400 space-y-2 mb-4">
-    <li>• All themes</li>
-    <li>• No watermark</li>
-    <li>• High-res export</li>
-    <li>• Future theme packs</li>
-  </ul>
-  <button id="upgradeBtn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 transition font-semibold">
-    Upgrade to Pro
-  </button>
-</div>
-</div> </section> <!-- ========================================================= FOOTER ========================================================= --> <footer class="py-10 text-center text-sm text-gray-500"> <div class="tooltip inline-block" data-tip="Built as a single HTML file"> Built with ❤️ as a single-file Micro-SaaS </div> <div class="mt-2"> <a href="#" class="hover:text-gray-300">GitHub Repository</a> </div> </footer> <!-- ========================================================= JAVASCRIPT ========================================================= --> <script> /* ============================================================ PRO STATE Future Gumroad / license key validation goes here. ============================================================ */ let isProUser = false; /* ============================================================ THEMES ============================================================ */ const themes = { "Midnight Glass": { bg: "rgba(17,24,39,0.6)", color: "#e5e7eb", pro: false }, "Soft Aurora": { bg: "linear-gradient(135deg,#312e81,#0f766e)", color: "#ecfeff", pro: false }, "Minimal Light": { bg: "rgba(255,255,255,0.85)", color: "#020617", pro: false }, "Neon Brutal": { bg: "linear-gradient(135deg,#7c3aed,#ec4899)", color: "#ffffff", pro: true }, "Cyber Dark": { bg: "#020617", color: "#22d3ee", pro: true }, "Hacker Code": { bg: "#000000", color: "#22c55e", pro: true }, "Solar Chrome": { bg: "linear-gradient(135deg,#fde047,#fb7185)", color: "#020617", pro: true }, "Mono Brutalist": { bg: "#111827", color: "#ffffff", pro: true } }; let currentTheme = "Midnight Glass"; /* ============================================================ DOM REFERENCES ============================================================ */ const textInput = document.getElementById('textInput'); const previewText = document.getElementById('previewText'); const preview = document.getElementById('preview'); const previewName = document.getElementById('previewName'); const previewHandle = document.getElementById('previewHandle'); const previewDate = document.getElementById('previewDate'); const avatar = document.getElementById('avatar'); const watermark = document.getElementById('watermark'); /* ============================================================ INITIAL STATE ============================================================ */ document.getElementById('dateInput').value = new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); previewDate.textContent = document.getElementById('dateInput').value; /* ============================================================ THEME RENDER ============================================================ */ const themesContainer = document.getElementById('themes'); Object.keys(themes).forEach(name => { const t = themes[name]; const btn = document.createElement('button'); btn.textContent = name + (t.pro ? ' PRO' : ''); btn.className = 'px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-left'; if (t.pro && !isProUser) btn.classList.add('pro-locked'); btn.onclick = () => { if (t.pro && !isProUser) { alert('Upgrade to Pro to unlock this theme.'); return; } currentTheme = name; applyTheme(); }; themesContainer.appendChild(btn); }); function applyTheme() { const t = themes[currentTheme]; preview.style.background = t.bg; preview.style.color = t.color; } applyTheme(); /* ============================================================ LIVE UPDATE (DEBOUNCED) ============================================================ */ let debounce; function updatePreview() { clearTimeout(debounce); debounce = setTimeout(() => { previewText.textContent = textInput.value; }, 50); } textInput.addEventListener('input', updatePreview); /* ============================================================ CONTROLS BINDINGS ============================================================ */ document.getElementById('fontFamily').onchange = e => previewText.style.fontFamily = e.target.value; document.getElementById('fontSize').oninput = e => previewText.style.fontSize = e.target.value + 'px'; document.getElementById('lineHeight').oninput = e => previewText.style.lineHeight = e.target.value; document.getElementById('username').oninput = e => previewName.textContent = e.target.value || 'Anonymous'; document.getElementById('handle').oninput = e => previewHandle.textContent = e.target.value || '@handle'; document.getElementById('avatarToggle').onchange = e => avatar.style.display = e.target.checked ? 'flex' : 'none'; document.getElementById('dateInput').oninput = e => previewDate.textContent = e.target.value; document.getElementById('shadowDepth').oninput = e => preview.style.boxShadow = `0 ${e.target.value}px ${e.target.value * 2}px rgba(0,0,0,0.5)`; document.getElementById('blurIntensity').oninput = e => preview.style.setProperty('--blur', e.target.value + 'px'); document.getElementById('noiseToggle').onchange = e => preview.classList.toggle('noise', e.target.checked); /* ============================================================ EXPORT ============================================================ */ document.getElementById('exportBtn').onclick = async () => { if (!window.html2canvas) { await loadHtml2Canvas(); } const canvas = await html2canvas(preview, { scale: isProUser ? 2 : 1, backgroundColor: null }); const link = document.createElement('a'); link.download = 'cleanshot-' + Date.now() + '.png'; link.href = canvas.toDataURL(); link.click(); }; function loadHtml2Canvas() { return new Promise(resolve => { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'; s.onload = resolve; document.body.appendChild(s); }); } /* ============================================================ PRESETS ============================================================ */ document.querySelectorAll('.preset').forEach(btn => { btn.onclick = () => { if (btn.dataset.type === 'tweet') { textInput.value = "Shipping in public is the fastest way to learn.\n\nBuild. Share. Repeat."; } if (btn.dataset.type === 'testimonial') { textInput.value = "CleanShot instantly made my posts look premium.\n\n— Happy User"; } if (btn.dataset.type === 'code') { textInput.value = "function shipFast() {\n return 'Build → Share → Learn';\n}"; document.querySelector('input[value=\"code\"]').checked = true; previewText.style.fontFamily = 'JetBrains Mono'; } updatePreview(); }; }); /* ============================================================ UPGRADE BUTTON (UI ONLY) ============================================================ */ document.getElementById('upgradeBtn').onclick = () => { // Simulated unlock for demo purposes isProUser = true; watermark.style.display = 'none'; alert('Pro unlocked (demo). All themes enabled.'); location.reload(); }; </script> </body> </html>
+<!-- SCRIPT -->
+<script>
+/* ================= PRO STATE ================= */
+let isProUser = localStorage.getItem('cleanshot_pro') === 'true';
+
+/* ================= THEMES ================= */
+const themes = {
+  "Midnight Glass": { bg:"rgba(17,24,39,0.6)", color:"#e5e7eb", pro:false },
+  "Soft Aurora": { bg:"linear-gradient(135deg,#312e81,#0f766e)", color:"#ecfeff", pro:false },
+  "Minimal Light": { bg:"rgba(255,255,255,0.9)", color:"#020617", pro:false },
+  "Neon Brutal": { bg:"linear-gradient(135deg,#7c3aed,#ec4899)", color:"#fff", pro:true }
+};
+
+const preview = document.getElementById('preview');
+const previewText = document.getElementById('previewText');
+const watermark = document.getElementById('watermark');
+
+if (isProUser) watermark.style.display = 'none';
+
+/* ================= THEME UI ================= */
+const themesBox = document.getElementById('themes');
+let currentTheme = Object.keys(themes)[0];
+
+function renderThemes() {
+  themesBox.innerHTML = '';
+  Object.entries(themes).forEach(([name,t])=>{
+    const b=document.createElement('button');
+    b.textContent=name+(t.pro?' PRO':'');
+    b.className='px-2 py-2 rounded bg-white/10';
+    if(t.pro&&!isProUser)b.classList.add('pro-locked');
+    b.onclick=()=>{
+      if(t.pro&&!isProUser)return alert('Upgrade to Pro');
+      currentTheme=name; applyTheme();
+    };
+    themesBox.appendChild(b);
+  });
+}
+
+function applyTheme(){
+  const t=themes[currentTheme];
+  preview.style.background=t.bg;
+  preview.style.color=t.color;
+}
+
+renderThemes(); applyTheme();
+
+/* ================= LIVE BINDINGS ================= */
+textInput.oninput=()=>previewText.textContent=textInput.value;
+fontFamily.onchange=e=>preview.style.fontFamily=e.target.value;
+fontSize.oninput=e=>previewText.style.fontSize=e.target.value+'px';
+lineHeight.oninput=e=>previewText.style.lineHeight=e.target.value;
+username.oninput=e=>previewName.textContent=e.target.value||'Anonymous';
+handle.oninput=e=>previewHandle.textContent=e.target.value||'@handle';
+avatarToggle.onchange=e=>avatar.style.display=e.target.checked?'flex':'none';
+dateInput.value=new Date().toDateString(); previewDate.textContent=dateInput.value;
+dateInput.oninput=e=>previewDate.textContent=e.target.value;
+shadowDepth.oninput=e=>preview.style.boxShadow=`0 ${e.target.value}px ${e.target.value*2}px rgba(0,0,0,.5)`;
+blurIntensity.oninput=e=>preview.style.setProperty('--blur',e.target.value+'px');
+noiseToggle.onchange=e=>preview.classList.toggle('noise',e.target.checked);
+
+/* ================= EXPORT ================= */
+async function loadCanvas(){
+  if(window.html2canvas)return;
+  await new Promise(r=>{
+    const s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+    s.onload=r; document.body.appendChild(s);
+  });
+}
+
+exportBtn.onclick=async()=>{
+  await loadCanvas();
+  const c=await html2canvas(preview,{scale:isProUser?2:1,backgroundColor:null});
+  const a=document.createElement('a');
+  a.download='cleanshot.png';
+  a.href=c.toDataURL();
+  a.click();
+};
+</script>
+
+</body>
+</html>
